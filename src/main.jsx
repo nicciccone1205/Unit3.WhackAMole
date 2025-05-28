@@ -1,10 +1,22 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.jsx";
+import { useGame } from "./GameContext";
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+import Field from "./Field";
+import Scoreboard from "./Scoreboard";
+import Welcome from "./Welcome";
+
+export default function App() {
+  const { playing } = useGame();
+  return (
+    <>
+      <h1>Whack a Mole</h1>
+      {playing ? (
+        <>
+          <Scoreboard />
+          <Field />
+        </>
+      ) : (
+        <Welcome />
+      )}
+    </>
+  );
+}
